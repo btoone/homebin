@@ -1,0 +1,1 @@
+A personal collection of `~/bin` scripts from the PeepCode "Advanced Command Line".  To install just clone to your `~/`
