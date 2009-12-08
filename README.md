@@ -1,5 +1,12 @@
-A personal collection of `~/bin` scripts from the PeepCode "Advanced Command Line".  To install clone the repo and then symlink the scripts into `~/bin`
 
-`ln -s ~/bin/homebin/* .`
+# Overview #
 
-TODO: Create a rake task to link the files for you
+A personal collection of `~/bin` scripts from the PeepCode "Advanced Command Line".
+
+# Installation #
+
+    cd ~/bin
+    git clone git://github.com/btoone/homebin
+    rake install
+
+The rake task will create symlinks for the scripts in your `~/bin` directory.
