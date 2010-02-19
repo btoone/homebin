@@ -5,8 +5,15 @@ A personal collection of `~/bin` scripts from the PeepCode "Advanced Command Lin
 
 # Installation #
 
+Get the code
+
     cd ~/bin
     git clone git://github.com/btoone/homebin
-    rake install
 
-The rake task will create symlinks for the scripts in your `~/bin` directory.
+Install vcprompt from source
+
+    ./vcprompt-install    # requires mercurial
+
+Create the symlinks to the scripts in your `~/bin` directory
+
+    rake install
