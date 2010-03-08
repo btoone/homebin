@@ -17,3 +17,9 @@ Install vcprompt from source
 Create the symlinks to the scripts in your `~/bin` directory
 
     rake install
+
+
+TODO:
+
+* make ~/bin directory if it doesn't exist
+* make sure you're running from the ~/bin dir or cd into it
