@@ -11,15 +11,13 @@ A personal collection of `~/bin` scripts from the PeepCode "Advanced Command Lin
     cd homebin
     rake install
 
-Install vcprompt from source
+Running the rake task will create symbolic links to the scripts in your `~/bin` directory.  The task will also install vcprompt from source.  If it fails, you can manually run the installer.
 
     ./vcprompt-install    # requires mercurial
 
-Create the symlinks to the scripts in your `~/bin` directory
+Note: The environment variable $PYTHONPATH now assumes Snow Leopard.  If you are running this on Leopard you'll need to change that variable.
 
-    rake install
-
-TODO:
+# TODO #
 
 * make ~/bin directory if it doesn't exist
 * make sure you're running from the ~/bin dir or cd into it
