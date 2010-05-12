@@ -5,10 +5,11 @@ A personal collection of `~/bin` scripts from the PeepCode "Advanced Command Lin
 
 # Installation #
 
-Get the code
-
-    cd ~/bin
-    git clone git://github.com/btoone/homebin
+    mkdir ~/code
+    cd !$
+    git clone git://github.com/btoone/homebin.git
+    cd homebin
+    rake install
 
 Install vcprompt from source
 
@@ -17,7 +18,6 @@ Install vcprompt from source
 Create the symlinks to the scripts in your `~/bin` directory
 
     rake install
-
 
 TODO:
 

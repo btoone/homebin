@@ -10,4 +10,4 @@ cd ~/src
 hg clone http://vc.gerg.ca/hg/vcprompt/
 cd vcprompt
 make
-cp vcprompt ~/bin/vcprompt
+sudo cp vcprompt /usr/local/bin/
