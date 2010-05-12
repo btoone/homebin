@@ -15,7 +15,7 @@ Running the rake task will create symbolic links to the scripts in your `~/bin` 
 
     ./vcprompt-install    # requires mercurial
 
-Note: The environment variable $PYTHONPATH now assumes Snow Leopard.  If you are running this on Leopard you'll need to change that variable.
+Note: The environment variable $PYTHONPATH needs to be set before running the installer.
 
 # TODO #
 
