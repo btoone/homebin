@@ -1,0 +1,13 @@
+# TODO Implement MacVim installation script
+
+# download src
+
+# copy app to /Applications
+
+# copy mvim to /usr/local/bin (use sudo)
+
+# create the symlink ln -nfs /usr/local/bin/mvin ~/bin/vim
+
+# NOTES You don't have to create a symlink for vcprompt because /usr/local/bin is in your path.
+#       You need a symlink for mvim so it can replace the default install for /usr/bin/vim and
+#       you can call it just using "vim"
