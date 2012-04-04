@@ -1,0 +1,53 @@
+#!/bin/sh
+
+# Opens an iTerm window for specifed rails project with 3 common tabs
+# (autotest, server, console/shell)
+# TODO: always open new tabs in the current iterm window (4 tabs total)
+
+if [[ $# == 0 ]]; then
+  PROJECT_DIR=$PWD
+elif [[ $# == 1 && -d "$1" ]]; then
+  PROJECT_DIR="$@"
+else
+  print "usage: iterm [/path/to/project]"
+  return 1
+fi
+
+osascript <<-SCRIPT
+tell application "iTerm"
+  activate
+  set myterm to (make new terminal)
+    tell the first terminal
+    
+    launch session "Panes"
+    
+    tell the last session
+      set name to "autotest"
+      write text "cd \"$PROJECT_DIR\""
+      write text "mate \"$PROJECT_DIR\""
+      write text "bundle exec guard"
+    end tell
+    
+    launch session "Default Session"
+    tell the last session
+      set name to "server"
+      write text "cd \"$PROJECT_DIR\""
+      write text "bundle exec rails s"
+    end tell
+    
+    launch session "Default Session"
+    tell the last session
+      set name to "console"
+      write text "cd \"$PROJECT_DIR\""
+      write text "bundle exec rails c"
+    end tell
+    
+    tell application "System Events" to keystroke "d" using {shift down, command down}
+    delay 1
+    tell the last session
+      set name to "shell"
+      write text "cd \"$PROJECT_DIR\""
+    end tell
+  end tell
+end tell
+SCRIPT
