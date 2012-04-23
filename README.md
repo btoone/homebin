@@ -5,11 +5,15 @@ A personal collection of `~/bin` scripts from the PeepCode "Advanced Command Lin
 
 # Installation #
 
-    mkdir ~/code
+    cd
+    mkdir ~/Bin           # if it doesn't already exist
+    brew install mercurial
+
+    mkdir ~/Code
     cd !$
     git clone git://github.com/btoone/homebin.git
     cd homebin
-    rake install
+    rake
 
 Running the rake task will create symbolic links to the scripts in your `~/bin` directory.  The task will also install vcprompt from source.  If it fails, you can manually run the installer.
 
