@@ -4,7 +4,7 @@ task :default => "install:all"
 
 namespace :install do
 
-  desc "Installs everything"
+  desc "[Default] Installs everything"
   task :all do
     Rake::Task["install:bins"].invoke
     Rake::Task["install:vcprompt"].invoke
