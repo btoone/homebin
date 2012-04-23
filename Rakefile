@@ -14,7 +14,7 @@ namespace :install do
   desc "Link scripts to user's ~/bin/ directory"
   task :bins do
     Dir['*'].each do |file|
-      excluded = %w[Rakefile README.md vcprompt-installer macvim-installer sublime2-installer]
+      excluded = %w[Gemfile Gemfile.lock Rakefile README.md vcprompt-installer macvim-installer sublime2-installer]
       next if excluded.include?(file) || File.directory?(file)
       
       original = File.join(ENV['HOME'], "bin", "#{file}")
