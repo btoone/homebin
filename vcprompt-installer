@@ -1,13 +1,15 @@
 #!/bin/sh
 
+# UPDATE: Use home brew instead to install vcprompt
+
 # Download, compile, and copy the vcprompt command to ~/bin.
 #
 # AUTHOR: Geoffrey Grosenbach
 #         July 27 2009
 
-mkdir -p ~/src
-cd ~/src
-hg clone http://vc.gerg.ca/hg/vcprompt/
-cd vcprompt
-make
-sudo cp vcprompt /usr/local/bin/
+# mkdir -p ~/src
+# cd ~/src
+# hg clone http://vc.gerg.ca/hg/vcprompt/
+# cd vcprompt
+# make
+# sudo cp vcprompt /usr/local/bin/
