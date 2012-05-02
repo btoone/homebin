@@ -24,7 +24,7 @@ tell application "iTerm"
     tell the last session
       set name to "autotest"
       write text "cd \"$PROJECT_DIR\""
-      write text "mate \"$PROJECT_DIR\""
+      write text "$EDITOR \"$PROJECT_DIR\""
       write text "bundle exec guard"
     end tell
     
