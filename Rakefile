@@ -44,28 +44,29 @@ namespace :install do
         when 'q'
           exit
         else
-          puts "skipping ~/#{file}\n\n"
-        end  # case
+          puts "INFO: Skipping file: ~/#{file}"
+        end
       else
         # no pre-existing file so just create the link
         puts "INFO: Linking file: ~/#{file}"
         system %Q{ln -s "$PWD/#{file}" "$HOME/#{HOMEBIN_DIR}/#{file}"}
       end
     end  # file
+    puts "INFO: Finished"
   end
     
   desc "Installs vcprompt"
   task :vcprompt do
     # Run vcprompt-installer
-    puts "\nAttempting to install vcprompt"
+    puts "INFO: Installing vcprompt"
     if File.exists?("/usr/local/bin/hg")
       if File.exists?("/usr/local/bin/vcprompt")
-        puts "The app vcprompt already exists in /usr/local/bin.  Exiting ..."
+        puts "INFO: The app vcprompt already exists in /usr/local/bin.  Exiting ..."
       else
         system %Q{sh vcprompt-installer}
       end
     else
-      puts "Unable to find the mercurial install which is required by vcprompt-installer.\nPlease double check your $PATH and run the installer manually"
+      puts "ERROR: Unable to find the mercurial install which is required by vcprompt-installer.\nPlease double check your $PATH and run the installer manually"
     end
   end
     
