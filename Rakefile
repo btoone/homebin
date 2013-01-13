@@ -12,18 +12,18 @@ namespace :install do
     Rake::Task["install:sublime2"].invoke
   end
 
-  desc "Link scripts to user's ~/bin/ directory"
+  desc "Link scripts to user's #{HOMEBIN_DIR} directory"
   task :bins do
     Dir['*'].each do |file|
       excluded = %w[Gemfile Gemfile.lock Rakefile README.md vcprompt-installer macvim-installer sublime2-installer]
       next if excluded.include?(file) || File.directory?(file)
-      
-      original = File.join(ENV['HOME'], "bin", "#{file}")
-      
     homebin_path = File.join(ENV['HOME'], HOMEBIN_DIR)
     
     Dir.mkdir(homebin_path) unless Dir.exists?(homebin_path)
     puts "INFO: Install directory: #{homebin_path}\n\n"
+
+      original = File.join(homebin_path, "#{file}")
+
       if File.exists?(original)
         print "File ~/#{file} exists, replace? [ynq] "  # prompt user
         case STDIN.gets.chomp  # get the user's input
@@ -32,8 +32,8 @@ namespace :install do
         when 'y'
           File.rename(original, original+"~")
           # system %Q{rm "$HOME/.#{file}"}
-          puts "Backing up ~/#{file}\n\n"
-          system %Q{ln -s "$PWD/#{file}" "$HOME/bin/#{file}"}
+          puts "INFO: Backing up file: ~/#{file}"
+          system %Q{ln -s "$PWD/#{file}" "$HOME/#{HOMEBIN_DIR}/#{file}"}
         when 'q'
           exit
         else
@@ -41,8 +41,8 @@ namespace :install do
         end  # case
       else
         # no pre-existing file so just create the link
-        puts "linking ~/#{file}\n\n"
-        system %Q{ln -s "$PWD/#{file}" "$HOME/bin/#{file}"}
+        puts "INFO: Linking file: ~/#{file}"
+        system %Q{ln -s "$PWD/#{file}" "$HOME/#{HOMEBIN_DIR}/#{file}"}
       end
     end  # file
   end
@@ -64,9 +64,9 @@ namespace :install do
     
   desc "Creates the link for the sublime2 command line tool"
   task :sublime2 do
-    puts "\nInstalling sublime2-installer"
-    if File.exists?("~/bin/subl")
-      puts "The app Sublime2 already exists in ~/bin.  Exiting ..."
+    puts "INFO: Installing sublime2-installer"
+    if File.exists?("$HOME/#{HOMEBIN_DIR}/subl")
+      puts "INFO: The app Sublime2 already exists in #{homebin_path}.  Exiting ..."
     else
       system %Q{sh sublime2-installer}
     end
