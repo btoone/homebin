@@ -4,6 +4,12 @@ task :default => "install:all"
 
 namespace :install do
   HOMEBIN_DIR = "Bintest"
+  EXCLUDED_FILES = %w(
+    Gemfile
+    Gemfile.lock
+    Rakefile
+    README.md
+  )
 
   desc "[Default] Installs everything"
   task :all do
@@ -14,13 +20,14 @@ namespace :install do
 
   desc "Link scripts to user's #{HOMEBIN_DIR} directory"
   task :bins do
-    Dir['*'].each do |file|
-      excluded = %w[Gemfile Gemfile.lock Rakefile README.md vcprompt-installer macvim-installer sublime2-installer]
-      next if excluded.include?(file) || File.directory?(file)
+
     homebin_path = File.join(ENV['HOME'], HOMEBIN_DIR)
     
     Dir.mkdir(homebin_path) unless Dir.exists?(homebin_path)
     puts "INFO: Install directory: #{homebin_path}\n\n"
+
+    Dir['**/*'].each do |file|
+      next if EXCLUDED_FILES.include?(file) || File.directory?(file)
 
       original = File.join(homebin_path, "#{file}")
 
