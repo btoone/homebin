@@ -3,6 +3,7 @@ require 'rake'
 task :default => "install:all"
 
 namespace :install do
+  HOMEBIN_DIR = "Bintest"
 
   desc "[Default] Installs everything"
   task :all do
@@ -19,6 +20,10 @@ namespace :install do
       
       original = File.join(ENV['HOME'], "bin", "#{file}")
       
+    homebin_path = File.join(ENV['HOME'], HOMEBIN_DIR)
+    
+    Dir.mkdir(homebin_path) unless Dir.exists?(homebin_path)
+    puts "INFO: Install directory: #{homebin_path}\n\n"
       if File.exists?(original)
         print "File ~/#{file} exists, replace? [ynq] "  # prompt user
         case STDIN.gets.chomp  # get the user's input

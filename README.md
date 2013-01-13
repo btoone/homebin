@@ -18,6 +18,3 @@ A personal collection of `~/bin` scripts from the PeepCode "Advanced Command Lin
 
 Running the rake task will create symbolic links to the scripts in your `~/Bin` directory.
 
-# TODO #
-
-* make ~/Bin directory if it doesn't exist
