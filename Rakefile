@@ -20,7 +20,7 @@ namespace :install do
 
   desc "Install user scripts to the bin/ directory"
   task :bins do
-    HOMEBIN_DIR = "Bintest"
+    HOMEBIN_DIR = "Bin"
     EXCLUDED_FILES = %w(
       Gemfile
       Gemfile.lock
