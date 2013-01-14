@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+
+# Pretty formats any json passed to it
+#     cat file | jj
+#     curl http://...json | jj
+#
+# http://camdez.github.com/blog/2012/02/10/pretty-json-in-and-out-of-ruby/
+
+require 'json'
+
+jj JSON[ARGF.read]
+
