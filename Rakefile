@@ -8,7 +8,6 @@ namespace :install do
   task :all do
     Rake::Task["install:list"].invoke
     Rake::Task["install:bins"].invoke
-    Rake::Task["install:installers"].invoke
   end
 
   desc "List installers"
