@@ -1,20 +1,28 @@
 
-# Overview #
+Overview
+========
 
-A personal collection of `~/bin` scripts from the PeepCode "Advanced Command Line".
+A personal collection of `~/bin`.
 
-# Installation #
+Some of these scripts are from the excellent PeepCode [Advanced Command
+Line](https://peepcode.com/products/advanced-command-line).
 
-    cd
-    mkdir ~/Bin               # if it doesn't already exist
-    brew install mercurial
-    brew install vcprompt
+Installation
+============
 
-    mkdir ~/Code
-    cd !$
-    git clone git://github.com/btoone/homebin.git
+    git clone git://github.com/caspyin/homebin.git
     cd homebin
-    rake
+    rake install
 
-Running the rake task will create symbolic links to the scripts in your `~/Bin` directory.
+Running the rake task will create symbolic links to the scripts in your `~/bin`
+directory.
+
+Installers
+----------
+
+This project has a few extra installers located in the `installers` directory.
+It is recommended that you run each manually but there is also a rake task if
+you're feeling lucky.
+
+    rake install:all
 

@@ -1,13 +1,19 @@
 require 'rake'
 
-task :default => "install:all"
+task :default => "install"
+
+desc "[Default] Lists available installers and installs bins"
+task :install do
+  Rake::Task["install:list"].invoke
+  Rake::Task["install:bins"].invoke
+end
 
 namespace :install do
 
-  desc "[Default] Installs everything"
+  desc "Installs everything"
   task :all do
-    Rake::Task["install:list"].invoke
     Rake::Task["install:bins"].invoke
+    Rake::Task["install:installers"].invoke
   end
 
   desc "List installers"
@@ -62,9 +68,11 @@ namespace :install do
     puts "INFO: Finished"
   end
   
+  # Run this task to automatically execute the installers
+  # WARNING: Recommend not using this and instead running the installers
+  # manually (which will also show installer output)
   desc "Executes installers"
   task :installers do
-    # Execute installers manually to see output
     # TODO: report installer output in this task
     Dir.glob('installers/*') do |installer|
       puts "INFO: Executing installer: #{installer}"
