@@ -13,6 +13,8 @@ gem install pry-nav
 gem install travis
 gem install travis-lint
 gem install hl
+gem install foreman
+gem install launchy
 
 echo -e "\nINFO: Installing environment gems"
 gem install rake

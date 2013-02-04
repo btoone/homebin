@@ -17,4 +17,5 @@ brew install tmux
 brew install vcprompt
 brew install wget
 brew install corkscrew
+brew install rabbitmq
 
