@@ -2,6 +2,8 @@
 
 # Installs homebrew packages for the home environment
 
+brew update
+brew upgrade
 brew install git
 brew install markdown
 brew install mercurial
@@ -17,5 +19,9 @@ brew install tmux
 brew install vcprompt
 brew install wget
 brew install corkscrew
+brew install autoconf
+brew install automake
+brew install libtool
 brew install rabbitmq
+brew install imagemagick
 
