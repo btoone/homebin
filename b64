@@ -1,27 +1,103 @@
 #!/usr/bin/env ruby
 
-# === Lib
+module BaseSixtyFour
+  class Application
+    require 'base64'
+    
+    def greeting; "hello"; end
 
-# when declaring eveything in a single file, order matters. The class has to
-# come before the runner.
-class BaseSixtyFour
-  require 'base64'
-  
-  def greeting; "hello"; end
+    def encode(str)
+      Base64.encode64(str)
+    end
 
-  def encode(str)
-    Base64.encode64(str)
-  end
-
-  def decode(str)
-    Base64.decode64(str)
+    def decode(str)
+      Base64.decode64(str)
+    end
   end
 end
+
+#
+# todo my goal here is to break out the options and execution code so for future
+# command line apps I can just reuse the same code. Then I can just implement my 
+# command line app logic in its own class, like BaseSixtyFour::Application
+# also the module naming is important because it is already setup to break out
+# into a folder structure if the app needs to become more complex
+#
+# See the following for examples on organizing code for command line app
+# https://github.com/elm-city-craftworks/rcat/blob/master/lib/rcat/application.rb
+# TestUnit::AutoRunner which has an method for options and run
+#
+
+module BaseSixtyFour
+  class Runner
+    def options
+      require 'optparse'
+
+      executable_name = File.basename($PROGRAM_NAME)
+
+      options = {}
+      option_parser = OptionParser.new do |opts|
+        opts.banner = <<-EOS
+          Encodes or decodes (-d) an input string using Ruby's Base64
+
+          Usage: #{executable_name} [options] string
+
+          EOS
+
+        opts.version = "0.1"
+        opts.on("-e", "--encode", "Encode the input string. Surround input in quotes if encoding multiple words") do
+          options[:encode] = true
+        end
+        opts.on("-d", "--decode", "Decode the input string") do
+          options[:decode] = true
+        end
+      end
+
+      # todo should this be moved to the #run method? how would I write test for it?
+      begin
+        option_parser.parse!
+        if ARGV.empty?
+          puts "Error: #{executable_name} requires a string to encode or decode"
+          puts
+          puts option_parser.help
+          exit 2
+        end
+      rescue OptionParser::InvalidOption => ex
+        STDERR.puts ex.message
+        STDERR.puts option_parser
+        exit 3
+      end
+    end
+
+    # todo how to I trigger this
+    def run
+      b64 = BaseSixtyFour::Application.new
+
+      if options[:decode]
+        puts b64.decode(ARGV[0])
+        exit 0
+      else
+        puts b64.encode(ARGV[0])
+        exit 0
+      end
+    end
+  end
+end
+
+
+# todo: this would typically be in a bin/ dir. does it actually work, placed
+# here?
+BaseSixtyFour::Runner.run
+
 
 # === Specs
 
 # TODO: Fill out specs
-# TODO: Figure out how to test the command line UI
+# TODO: Figure out how to test the command line UI; See rcat link above. his test
+# just uses a system call. Also this is what the aruba project does.
+# TODO: now that you know how to use guard-minitest to run tests see if there is an easy way to
+# implement it when creating a small cmd line app like this. possibly just running guard with
+# commandline args and not using a guardfile.
 
 # require 'minitest/autorun'                                                    # uncomment to run tests when executing this script
 require 'minitest/spec'
@@ -40,63 +116,4 @@ describe BaseSixtyFour do
   it "calls base64 decode when arg is -d"
   it "plays well with others by accepting stdin"
 end
-
-# === Options
-
-require 'optparse'
-
-# maybe options should be handled by a runner script declared outside this class
-executable_name = File.basename($PROGRAM_NAME)
-
-options = {}
-option_parser = OptionParser.new do |opts|
-  opts.banner = <<-EOS
-Encodes or decodes (-d) an input string using Ruby's Base64
-
-Usage: #{executable_name} [options] string
-
-  EOS
-
-  opts.version = "0.1"
-  opts.on("-e", "--encode", "Encode the input string. Surround input in quotes if encoding multiple words") do
-    options[:encode] = true
-  end
-  opts.on("-d", "--decode", "Decode the input string") do
-    options[:decode] = true
-  end
-end
-
-begin
-  option_parser.parse!
-  if ARGV.empty?
-    puts "Error: #{executable_name} requires a string to encode or decode"
-    puts
-    puts option_parser.help
-    exit 2
-  end
-rescue OptionParser::InvalidOption => ex
-  STDERR.puts ex.message
-  STDERR.puts option_parser
-  exit 3
-end
-
-# === Runner
-
-def run(options)
-  b64 = BaseSixtyFour.new
-
-  # puts options
-  # puts b64.greeting if options[:encode]
- 
-  if options[:decode]
-    puts b64.decode(ARGV[0])
-    exit 0
-  else
-    puts b64.encode(ARGV[0])
-    exit 0
-  end
-end
-
-# have the runner call the run() method
-run(options)
 
