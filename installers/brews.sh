@@ -24,4 +24,7 @@ brew install automake
 brew install libtool
 brew install rabbitmq
 brew install imagemagick
+brew install ssh-copy-id
+brew install ghostscript
+brew install graphviz
 
