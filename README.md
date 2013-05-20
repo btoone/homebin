@@ -1,4 +1,11 @@
 
+TODO: Do I need a gemfile for the tests? Or should I just rely on gems already
+      installed? 
+
+TODO: Should I have a spec folder for this project? I think if I'm going to have a gemfile then it
+makes sense to have a folder for specs as well. But then the command line apps would be turning into
+a larger project and then maybe each one should be extracted out into its own project.
+
 Overview
 ========
 
