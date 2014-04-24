@@ -27,7 +27,6 @@ brew install imagemagick
 brew install ssh-copy-id
 brew install ghostscript
 brew install graphviz
-brew install nodejs
 brew install tig
 brew install sqlite
 brew install openssl
