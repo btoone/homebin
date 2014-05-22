@@ -30,4 +30,5 @@ brew install graphviz
 brew install tig
 brew install sqlite
 brew install openssl
+brew install reattach-to-user-namespace
 
